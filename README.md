@@ -114,7 +114,7 @@ them; `NEXT_PUBLIC_*` values are inlined into the browser bundle at build time.
 | --- | --- | --- |
 | `AUTHOLOGIC_API_URL`, `AUTHOLOGIC_API_LOGIN`, `AUTHOLOGIC_API_KEY` | server | Authologic API access |
 | `APP_BASE_URL` | server | Public HTTPS origin used for the return and webhook URLs |
-| `WEBHOOK_SECRET` | server | Shared secret the webhook URL must carry (`?token=`). Required in production builds. |
+| `WEBHOOK_SECRET` | server | Shared secret the webhook URL must carry (`?token=`). Required in every environment. |
 | `NEXT_PUBLIC_AUTHOLOGIC_WIDGET_ID` | browser | Widget id (`development_only` works in sandbox) |
 | `NEXT_PUBLIC_AUTHOLOGIC_ENVIRONMENT` | browser | `sandbox`, `production`, or a custom base URL. Must match the environment of `AUTHOLOGIC_API_URL`. |
 | `NEXT_PUBLIC_FORM_URL` | browser | Optional target for the "Fill out the form" button |
@@ -140,7 +140,7 @@ only goes to the server log.
 | Widget logs `kernel error … API request failed: 404` | The widget is talking to a different Authologic environment than the backend. Set `NEXT_PUBLIC_AUTHOLOGIC_ENVIRONMENT` to match `AUTHOLOGIC_API_URL` and restart. |
 | `hide() called but widget is not shown` | Harmless. The harness always calls `hide()` before `init()`. |
 | Result screen stays on "Still processing" | The webhook never arrived. Check that `${APP_BASE_URL}/api/webhook` is reachable and that `WEBHOOK_SECRET` matches. |
-| Webhook returns `503 Webhook not configured` | Production build without `WEBHOOK_SECRET`. Set it. |
+| Webhook returns `503 Webhook not configured` | `WEBHOOK_SECRET` is missing. Set it. |
 
 ## Before going to production
 
